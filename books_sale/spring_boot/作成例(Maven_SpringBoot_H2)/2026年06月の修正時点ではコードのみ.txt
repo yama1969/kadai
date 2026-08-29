@@ -1,0 +1,26 @@
+ソースだけ変更して、まだコンパイルはしてないので、あとでしておいてね。
+
+■変更箇所 2026/6/1(月)の山田より
+
+controller.OrderAdd#exec()
+  ページを戻っての二重注文を防止するため
+    43行目：ifの条件に item == null を追加
+    70行目：session.removeAttribute("item");を追加
+
+exceptions.IllegalItemNoException
+  未使用のため削除
+
+
+■変更箇所 2026/6/18(木)の山田より
+
+schema.sql
+  8行目：ordersテーブルのnoにAUTO_INCREMENTを追加
+
+dao.OrderDataAccessor#insert(Order newOrder)
+  orders.noをAUTO_INCREMENTにしたことによる処理変更
+  ただし、H2のSCOPE_IDENTITY()は公式マニュアルで
+  はっきり確認できなかったので、ちゃんと実行できるか自信ない。
+  とりあえずやってみて！
+
+
+いじょ

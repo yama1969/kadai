@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" th:href="@{/style.css}">
+  <title>注文入力完了：書籍販売システム</title>
+</head>
+<body>
+  <section id="container">
+    <h1>書籍販売システム</h1>
+    <h2>ご注文の完了</h2>
+    <p>
+      ご注文ありがとうございます。以下の通り承りました。
+    </p>
+    <ul>
+      <li><span class="column">注文番号</span><span th:text="|：${order.no}|"></span></li>
+      <li><span class="column">商品名</span><span th:text="|：${order.item.name}|"></span></li>
+      <li><span class="column">価格</span><span th:text="|：${order.item.price}円|"></span></li>
+      <li><span class="column">注文個数</span><span th:text="|：${order.quantity}個|"></span></li>
+      <li><span class="column">注文者氏名</span><span th:text="|：${order.sei} ${order.mei}|"></span></li>
+      <li><span class="column">注文者住所</span><span th:text="|：${order.pref}${order.add}|"></span></li>
+      <li><span class="column">電話番号</span><span th:text="|：${order.tel}|"></span></li>
+      <li><span class="column">メールアドレス</span><span th:text="|：${order.mail}|"></span></li>
+    </ul>
+    <p>
+    </p>
+    <form class="to_top" action="index.html">
+      <input type="submit" value="トップへ戻る">
+    </form>
+  </section>
+</body>
+</html>
