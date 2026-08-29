@@ -1,0 +1,7 @@
+{
+    "java.project.sourcePaths": ["src"],
+    "java.project.outputPath": "SalesManager/WEB-INF/classes",
+    "java.project.referencedLibraries": [
+        "../../app/apache-tomcat-11.0.20/lib/**/*.jar"
+    ]
+}
