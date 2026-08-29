@@ -1,0 +1,7 @@
+javadoc -d ../IF仕様 -link http://docs.oracle.com/javase/jp/8/docs/api/ -windowtitle Calc1 *.java
+
+
+javadoc -d ../IF仕様 -link http://docs.oracle.com/javase/jp/8/docs/api/ -windowtitle Calc3 *.java
+
+
+javadoc -d ../IF仕様 -link http://docs.oracle.com/javase/jp/8/docs/api/ -windowtitle Calc4 *.java
