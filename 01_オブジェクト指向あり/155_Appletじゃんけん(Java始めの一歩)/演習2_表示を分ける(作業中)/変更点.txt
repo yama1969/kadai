@@ -1,0 +1,4 @@
+ゲーム進行役を表すクラスMasterを作成
+  JankenAppletクラスから2つのフィールドhand1とhan2を移動
+  JankenAppletクラスからフィールドstateを移動
+
