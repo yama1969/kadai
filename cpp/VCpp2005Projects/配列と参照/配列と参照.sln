@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual C++ Express 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "配列と参照", "配列と参照\配列と参照.vcproj", "{80F1CCDC-1355-4CF8-A739-95A1E59B6205}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{80F1CCDC-1355-4CF8-A739-95A1E59B6205}.Debug|Win32.ActiveCfg = Debug|Win32
+		{80F1CCDC-1355-4CF8-A739-95A1E59B6205}.Debug|Win32.Build.0 = Debug|Win32
+		{80F1CCDC-1355-4CF8-A739-95A1E59B6205}.Release|Win32.ActiveCfg = Release|Win32
+		{80F1CCDC-1355-4CF8-A739-95A1E59B6205}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

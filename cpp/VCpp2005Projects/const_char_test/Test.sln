@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual C++ Express 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vector_test", "..\vector_test\vector_test.vcproj", "{7102258E-31F5-4D1C-8365-D01CE604C2C3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "const_char_test", "Test.vcproj", "{F7A98B88-43A5-4726-A306-4E435D33DCA3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7102258E-31F5-4D1C-8365-D01CE604C2C3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7102258E-31F5-4D1C-8365-D01CE604C2C3}.Debug|Win32.Build.0 = Debug|Win32
+		{7102258E-31F5-4D1C-8365-D01CE604C2C3}.Release|Win32.ActiveCfg = Release|Win32
+		{7102258E-31F5-4D1C-8365-D01CE604C2C3}.Release|Win32.Build.0 = Release|Win32
+		{F7A98B88-43A5-4726-A306-4E435D33DCA3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F7A98B88-43A5-4726-A306-4E435D33DCA3}.Debug|Win32.Build.0 = Debug|Win32
+		{F7A98B88-43A5-4726-A306-4E435D33DCA3}.Release|Win32.ActiveCfg = Release|Win32
+		{F7A98B88-43A5-4726-A306-4E435D33DCA3}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

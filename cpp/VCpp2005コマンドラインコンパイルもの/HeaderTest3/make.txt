@@ -1,0 +1,4 @@
+/EHsc 
+HeaderTest3.cpp
+oya.cpp
+ko.cpp

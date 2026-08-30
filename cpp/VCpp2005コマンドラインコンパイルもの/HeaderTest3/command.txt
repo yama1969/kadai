@@ -1,0 +1,8 @@
+メイクファイルを作成し、そこにオプションとコンパイルファイルを書く方法。
+
+cl @make.txt
+
+または、以下のように全オプションと全cppファイルを書く。
+
+cl /EHsc HeaderTest3.cpp oya.cpp ko.cpp
+
