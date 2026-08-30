@@ -1,0 +1,32 @@
+■BookOrderアプリのサンプルにおけるクラスに関する注意
+
+業務システム：SalesManager
+販売システム：BookOrder
+
+BookOrderのクラス構成は、下記1～5の通り、完全にSalesManagerのサブセットである。
+
+1.exceptionパッケージの以下のクラスは不要
+    EmptyOrdersConditionException
+    NoOrderException
+    CannotSearchOrdersException
+
+2.beansパッケージの以下のクラスは不要
+    OrderCondition
+
+3.dao.OrderDataAccessorの以下のメソッドは不要
+    public synchronized ArrayList<Order> select(OrderCondition key)
+
+4.model.OrdersManagerの以下のメソッドは不要
+    public ArrayList<Order> search(OrderCondition key)
+
+5.controllerパッケージの以下のクラスは不要
+    StaffMenu改めOrderSearchTop
+    OrderSearch
+
+
+サブセットであるので、SalesManagerのクラス群をそのまま利用することも可能。
+そこで、SalesManagerのclassesの内容をSalesManager.jarにして、BookOrderのlibに配備した。
+
+あとは各jspファイルとweb.xmlをBookOrder用に編集して、サンプル完成とした。
+
+以上

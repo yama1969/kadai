@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" th:href="@{/style.css}">
+  <title>商品検索：書籍販売システム</title>
+</head>
+<body>
+<section id="container">
+  <h1>書籍販売システム</h1>
+  <h2>商品検索</h2>
+
+  <p class="message" th:text="${message}"></p>
+
+  <p>
+    検索する書籍名を入力してください。書籍名の一部分でも検索できます。
+  </p>
+  <form action="itemList.html" method="post">
+    <ul>
+      書籍名：<input type="text" name="itemname"><input type="submit" value="検索">
+    </ul>
+  </form>
+  <form class="to_top" action="orderSearch.html" method="post">
+    <input type="submit" value="店員メニュー">
+  </form>
+</section>
+</body>
+</html>

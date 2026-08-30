@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS items(
+  code CHAR(4) PRIMARY KEY,
+  name VARCHAR(50) NOT NULL,
+  price INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS orders(
+  no INT AUTO_INCREMENT,
+  orderdate DATETIME NOT NULL,
+  itemCode CHAR(4),
+  quantity INT NOT NULL,
+  sei VARCHAR(50) NOT NULL,
+  mei VARCHAR(50) NOT NULL,
+  pref VARCHAR(4) NOT NULL,
+  address VARCHAR(200) NOT NULL,
+  tel VARCHAR(25),
+  mail VARCHAR(250),
+  PRIMARY KEY(no),
+  FOREIGN KEY(itemCode) REFERENCES items(code)
+);

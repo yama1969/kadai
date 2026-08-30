@@ -1,0 +1,46 @@
+-- 書籍販売システム データベース構築SQL
+
+CREATE DATABASE GoodsOrder DEFAULT CHARACTER SET utf8;
+
+USE GoodsOrder;
+
+CREATE TABLE items(
+  code CHAR(4) PRIMARY KEY,
+  name VARCHAR(50),
+  price INT
+) DEFAULT CHARSET=utf8;
+
+CREATE TABLE orders(
+  no INT PRIMARY KEY,
+  orderdate DATETIME,
+  itemCode CHAR(4),
+  quantity INT,
+  sei VARCHAR(50),
+  mei VARCHAR(50),
+  pref VARCHAR(4),
+  address VARCHAR(200),
+  tel VARCHAR(25),
+  mail VARCHAR(250),
+  FOREIGN KEY(itemCode) REFERENCES items(code)
+) DEFAULT CHARSET=utf8;
+
+-- -----------------------------------------------
+
+INSERT INTO items(code, name, price)
+ VALUES('P001', 'HTML/CSS/JavaScript', 2460);
+
+INSERT INTO items(code, name, price)
+ VALUES('P002', 'Java言語の基本', 2880);
+
+INSERT INTO items(code, name, price)
+ VALUES('P003', '基本情報技術者試験対策', 1880);
+
+INSERT INTO orders(no, orderdate, itemCode, quantity, sei, mei, pref, address, tel)
+ VALUES(1, '2022-05-18 13:35:22', 'P001', 1, '鈴木', '宏', '宮城県', '仙台市青葉区', '022-222-2222');
+
+INSERT INTO orders(no, orderdate, itemCode, quantity, sei, mei, pref, address, tel)
+ VALUES(2, '2022-05-19 10:18:43', 'P003', 2, '木田', '幸治', '宮城県', '仙台市太白区', '022-333-3333');
+
+INSERT INTO orders(no, orderdate, itemCode, quantity, sei, mei, pref, address, tel)
+ VALUES(3, '2022-05-21 18:26:06', 'P003', 1, '田村', '康', '宮城県', '仙台市若林区', '022-444-4444');
+
