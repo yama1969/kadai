@@ -1,0 +1,49 @@
+<html>
+<head>
+	<title>ザ・アンケート</title>
+</head>
+<body>
+	<form name="enquate" method="post" action="enquate.php">
+		Ｑ１．年齢・性別をご入力ください。<br>
+		　　<input type="text" name="age">歳<br>
+		　　<input type="radio" name="sei" value=0 checked>男性<br>
+		　　<input type="radio" name="sei" value=1>女性<br>
+		<br>
+		Ｑ２．配偶者はありますか？<br>
+		　　<input type="radio" name="haigu" value=0 checked>はい<br>
+		　　<input type="radio" name="haigu" value=1>いいえ<br>
+		<br>
+		Ｑ３．扶養家族人数を入力してください。（配偶者も含む）<br>
+		　　<input type="text" name="huyo"><br>
+		<br>
+		Ｑ４．希望勤務地を選択してください。<br>
+		　　<select name="kinmuchi">
+			<option value=0>仙台市内
+			<option value=1>宮城県内
+			<option value=2>東北
+			<option value=3>東日本
+			<option value=4>日本国内
+			<option value=5>どこでも
+		</select><br>
+		<br>
+		Ｑ５．希望職種を選択してください。<br>
+		　　<select name="syokusyu">
+			<option value=0>プログラマ
+			<option value=1>システムエンジニア
+			<option value=2>技術サポート
+			<option value=3>営業
+			<option value=4>ヘルプデスク
+			<option value=5>テスター
+		</select><br>
+		<br>
+		Ｑ６．採用されるためには、希望年収をどのくらいにすればよいと考えますか。<br>
+		　　<input type="text" name="nensyu">万円<br>
+		<br>
+		Ｑ７．職種・年収を考慮すると、採用されるためには一日あたり何時間くらいの残業が妥当だとお考えですか。<br>
+		　　<input type="text" name="zangyo">時間<br>
+		<br>
+		<input type="submit" name="送信" value="送　　信"><br>
+		<input type="reset" name="やり直し" value="やり直し">
+	</form>
+</body>
+</html>
