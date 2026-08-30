@@ -1,2 +1,0 @@
-java FoodShopTester
-pause

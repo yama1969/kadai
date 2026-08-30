@@ -1,2 +1,0 @@
-java TireTester
-pause

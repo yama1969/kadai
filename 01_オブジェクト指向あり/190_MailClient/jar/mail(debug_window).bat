@@ -1,1 +1,0 @@
-java -jar mail.jar

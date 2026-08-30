@@ -1,6 +1,0 @@
-time 10
-
-//dir D:\airplane\photo\
-//dir C:\Documents and Settings\All Users\Documents\My Pictures\Sample Pictures\
-//dir C:\Documents and Settings\yamada-family\デスクトップ\
-dir Z:\Documents and Settings\yamada-family\My Documents\写真\1.デジカメ撮影\

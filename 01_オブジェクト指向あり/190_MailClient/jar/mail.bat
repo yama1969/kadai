@@ -1,1 +1,0 @@
-start javaw -jar mail.jar

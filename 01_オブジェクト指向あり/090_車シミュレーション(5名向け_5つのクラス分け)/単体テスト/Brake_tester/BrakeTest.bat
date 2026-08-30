@@ -1,2 +1,0 @@
-java BrakeTester
-pause
