@@ -1,0 +1,64 @@
+<html>
+<title>External DB by JavaScript</title>
+<script language="JavaScript">
+<!--
+  var cols = 3;
+  var rows = 10;
+  var amount =  cols * rows;
+  var exDB = new Array();
+//-->
+</script>
+<script language="JavaScript" src="data.js"></script>
+<script language="JavaScript">
+<!--
+  function DataSearch(ichar){
+    if(ichar == ""){
+      alert("ŒŸõ‚·‚é•¶š—ñ‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢");
+      document.iform.ichar.focus();
+      return false;
+    }
+    var flag = false;
+    var ResultWin = window.open("","Result","toolbar=no,location=no,status=no,menubar=no,width=400,height=200");
+    ResultWin.document.write("<h3>ŒŸõŒ‹‰Ê</h3>");
+    ResultWin.document.write("<hr><table border>");
+    for(i=3;i<amount;i+=cols){
+      if(exDB[i]==ichar){
+        ResultWin.document.write("<tr><td width=60>"+exDB[i]+"</td>");
+        ResultWin.document.write("<td width=120>"+exDB[i+1]+"</td>");
+        ResultWin.document.write("<td width=120>"+exDB[i+2]+"</td></tr>");
+        flag = true;
+      }
+    }
+    if(flag == false){
+      ResultWin.document.write("<tr><td>ŠY“–‚·‚é•¶š—ñ‚Í‚ ‚è‚Ü‚¹‚ñ</td></tr>");
+    }
+    ResultWin.document.write("</table>");
+    ResultWin.document.close();
+  }
+
+  function PrintData(){
+    document.write("<table border>");
+    for(i=0;i<amount;i+=cols){
+      document.write("<tr><td width=60 align=center>"+exDB[i]+"</td>");
+      document.write("<td width=120>"+exDB[i+1]+"</td>");
+      document.write("<td width=120>"+exDB[i+2]+"</td></tr>");
+    }
+    document.write("</table>");
+  }
+//-->
+</script>
+<body>
+ŒŸõ‚µ‚½‚¢–¼‘O‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢<br>
+<form name="iform">
+  –¼‘OF<input type="text" name="ichar">
+  <input type="button" value="Search" onClick="DataSearch(document.iform.ichar.value)">
+</form>
+<hr>
+ˆê——<br>
+<script language="JavaScript">
+<!--
+  PrintData();
+//-->
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="IE=edge">
+  <title>5-05_slide</title>
+  <link href="../../_common/css/style.css" rel="stylesheet" type="text/css">
+  <style>
+    #student_data {
+      display : none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-contents">
+      <h1>フォーム</h1>
+      <h2>前の項目の選択によって後の入力項目が変わる</h2>
+    </div><!-- /.header-contents -->
+  </header>
+  <div class="main-wrapper">
+  <section>
+    <form id="form" action="thankyou.html" method="get">
+      職業<br>
+      <select name="profession">
+        <option value="society">社会人</option>
+        <option value="student">学生</option>
+      </select><br>
+      <div id="student_data">
+        学校名<br>
+        <input type="text" name="school">
+      </div>
+      自由記入欄<br>
+      <textarea name="free" rows="3"></textarea><br>
+      <input type="submit" value="送信">
+    </form>
+  </section>
+  </div><!-- /.main-wrapper -->
+  <footer>JavaScript Samples</footer>
+  <script>
+    var form = document.getElementById('form');
+    
+    form.profession.onchange = function(){
+      var form = document.getElementById('form');
+      var student = document.getElementById('student_data');
+      
+      if(form.profession.value === 'student'){
+        student.style.display = 'block';
+        form.school.required = true;
+      }else{
+        student.style.display = 'none';
+        form.school.required = false;
+      }
+    };
+  </script>
+</body>
+</html>

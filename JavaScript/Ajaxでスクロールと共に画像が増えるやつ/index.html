@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>My Photos</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body id="body">
+  <header>
+    <h1>My Photos</h1>
+  </header>
+  <div class="container">
+    <div id="img_unit">
+    </div>
+  </div>
+  <script>
+  {
+    window.addEventListener('scroll', ()=> {
+      const all = document.documentElement.scrollHeight;
+      const win = document.documentElement.clientHeight;
+      const pos = document.documentElement.scrollTop;
+      if (all - win <= pos) {
+          // 最下部に到達したときに実行する処理
+          read();
+      }
+    });
+
+    let read = function(){
+      let ajax = new XMLHttpRequest();
+      ajax.open('GET', 'images.json');
+      ajax.responseType = 'json';
+      ajax.send(null);
+
+      ajax.onreadystatechange = function(){
+        if(ajax.readyState === XMLHttpRequest.DONE && ajax.status === 200){
+          for(let i = 0; i < this.response.length; i++){
+            let data = this.response[i];
+
+            let img = document.createElement('img');
+            img.setAttribute('src', data.path);
+
+            let caption = document.createElement('div');
+            caption.className = 'inner';
+            caption.innerHTML = '<p>' + data.caption + '<span>' + data.name + '</span></p>';
+
+            let div = document.createElement('div');
+            div.className = 'photo';
+            div.appendChild(img);
+            div.appendChild(caption);
+
+            let unit = document.getElementById('img_unit');
+            unit.appendChild(div);
+          }
+        }
+      };
+    }
+    read();
+  }
+  </script>
+</body>
+</html>

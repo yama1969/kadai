@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <meta http-equiv="Content-Script-Type" content="text/javascript">
+  <style type="text/css">
+    .page{
+        text-align       : center;
+        color            : white;
+        background-color : black;
+    }
+
+    .content{
+        text-align : left;
+        width      : 700px;
+        margin     : auto;
+    }
+
+    .cell{
+        width  : 100px;
+        height : 100px;
+    }
+
+    .cell2{
+        width  : 50px;
+        height : 50px;
+    }
+
+    .cell3{
+        width  : 50px;
+        height : 50px;
+    }
+
+    .title{
+        font-weight : bold;
+    }
+
+    .descript{
+        font-size : 100%;
+    }
+
+  </style>
+  <script type="text/javascript">
+  <!--
+  var elem = new Array(3);
+  elem[0] = "00";
+  elem[1] = "00";
+  elem[2] = "00";
+
+  function black_grad(){
+    var s_elem = new Array(3);
+    var ss_elem = new Array(3);
+    for(var i = 0; i < 6; i++){
+      for(var j = 0; j < 3; j++){
+        s_elem[j] = Math.floor(Number(elem[j]) / 51 / 5 * i) * 51;
+        if( s_elem[j].toString(16).length == 1 ){
+          ss_elem[j] = "0" + s_elem[j].toString(16);
+        }else{
+          ss_elem[j] = s_elem[j].toString(16);
+        }
+      }
+
+      var id = "b" + (i + 1);
+      var col = "#" + ss_elem[0] + ss_elem[1] + ss_elem[2];
+      document.all.item(id).style.backgroundColor = col;
+      id = id + "c";
+      document.from_black.item(id).value = col;
+    }
+  }
+
+  function white_grad(){
+    var s_elem = new Array(3);
+    var ss_elem = new Array(3);
+    for(var i=0;i<6;i++){
+      for(var j=0;j<3;j++){
+        s_elem[j] = 255 - Math.floor((255-Number(elem[j]))/51/5*i)*51;
+        if( s_elem[j].toString(16).length == 1 ){
+          ss_elem[j] = "0"+s_elem[j].toString(16);
+        }else{
+          ss_elem[j] = s_elem[j].toString(16);
+        }
+      }
+
+      var id = "w"+(i+1);
+      var col = "#"+ss_elem[0]+ss_elem[1]+ss_elem[2];
+      document.all.item(id).style.backgroundColor = col;
+      id = id+"c";
+      document.from_white.item(id).value = col;
+    }
+  }
+
+  function grad_exec(){
+    for(var i=0;i<6;i++){
+      if( document.from_white.red[i].checked ){
+        elem[0] = document.from_white.red[i].value;
+        break;
+      }
+    }
+    for(var i=0;i<6;i++){
+      if( document.from_white.green[i].checked ){
+        elem[1] = document.from_white.green[i].value;
+        break;
+      }
+    }
+    for(var i=0;i<6;i++){
+      if( document.from_white.blue[i].checked ){
+        elem[2] = document.from_white.blue[i].value;
+        break;
+      }
+    }
+
+    black_grad();
+    white_grad();
+  }
+
+  function chgrgb(pos){
+    var axis = 0;
+    for(var i=0;i<3;i++){
+      if( document.rgb.axis[i].checked ){
+        axis = i;
+        break;
+      }
+    }
+
+    var xx = 0;
+    var yy = 0;
+    var x = 0;
+    var y = 0;
+    
+    switch(axis){
+      case 0:
+        xx = 1;
+        yy = -1;
+        x = 0;
+        y = 5;
+        break;
+      case 1:
+        xx = -1;
+        yy = 1;
+        x = 5;
+        y = 0;
+        break;
+      case 2:
+        xx = -1;
+        yy = -1;
+        x = 5;
+        y = 5;
+        break;
+    }
+
+    for(var i=0;i<6;i++){
+      for(var j=0;j<6;j++){
+        var a = (x+xx*j)*51;
+        var aa = "";
+        if( a.toString(16).length == 1 ){
+          aa = "0"+a.toString(16);
+        }else{
+          aa = a.toString(16);
+        }
+        var b = (y+yy*i)*51;
+        var bb = "";
+        if( b.toString(16).length == 1 ){
+          bb = "0"+b.toString(16);
+        }else{
+          bb = b.toString(16);
+        }
+        var c = pos*51;
+        var cc = "";
+        if( c.toString(16).length == 1 ){
+          cc = "0"+c.toString(16);
+        }else{
+          cc = c.toString(16);
+        }
+        
+        var col = "";
+        switch(axis){
+          case 0:
+            col = "#"+aa+cc+bb;
+            break;
+          case 1:
+            col = "#"+bb+aa+cc;
+            break;
+          case 2:
+            col = "#"+cc+aa+bb;
+            break;
+        }
+        var id = "x"+j+"y"+i;
+        document.all.item(id).style.backgroundColor = col;
+      }
+    }
+
+    for(var i=0;i<6;i++){
+      var a = i * 51;
+      var aa = "";
+      if( a.toString(16).length == 1 ){
+        aa = "0"+a.toString(16);
+      }else{
+        aa = a.toString(16);
+      }
+      
+      var col = "";
+      switch(axis){
+        case 0:
+          col = "#00"+aa+"00";
+          break;
+        case 1:
+          col = "#0000"+aa;
+          break;
+        case 2:
+          col = "#"+aa+"0000";
+          break;
+      }
+      id = "rgb"+i;
+      document.all.item(id).style.backgroundColor = col;
+    }
+
+    var a = (pos*51).toString(16);
+    var aa = "";
+    if( a.length == 1 ){
+      aa = "#0"+a;
+    }else{
+      aa = "#"+a;
+    }
+    document.rgb.z.value = aa;
+  }
+
+  function dispcolor(x,y){
+    var id = "x"+x+"y"+y;
+    var col = document.all.item(id).style.backgroundColor;
+    var colname = "#" + col.match(/\d+/g).map(function(a){return ("0" + parseInt(a).toString(16)).slice(-2)}).join("");
+    document.rgb.color.value = colname;
+  }
+
+  function dispcolor2(x,y){
+    var id = "tone_x"+x+"y"+y;
+    var col = document.all.item(id).style.backgroundColor;
+    var colname = "#" + col.match(/\d+/g).map(function(a){return ("0" + parseInt(a).toString(16)).slice(-2)}).join("");
+    document.tone.color.value = colname;
+  }
+
+  function chgtone(sr,sg,sb){
+
+    var er = sr-(sr-2.5)*2;
+    var eg = sg-(sg-2.5)*2;
+    var eb = sb-(sb-2.5)*2;
+
+    var xr = (5-sr)/5;
+    var xg = (5-sg)/5;
+    var xb = (5-sb)/5;
+
+    for(var i=0;i<6;i++){
+      for(var j=0;j<6;j++){
+
+//  ( ( 0+(er-0)*j/5 ) - ( sr+(5-sr)*j/5 ) )*i/5
+//  ( ( er*j/5 ) - sr - (5-sr)*j/5 )*i/5
+//  ( ( er-5+sr )*j/5 - sr )*i/5
+//  ((er+sr-5)*j/5-sr)*i/5
+
+        var yr = ((er+sr-5)*j/5-sr)*i/5;
+        var yg = ((eg+sg-5)*j/5-sg)*i/5;
+        var yb = ((eb+sb-5)*j/5-sb)*i/5;
+
+        var r = Math.floor(sr+xr*j+yr)*51;
+        var rr = "";
+        if( r.toString(16).length == 1){
+          rr = "0"+r.toString(16);
+        }else{
+          rr = r.toString(16);
+        }
+        var g = Math.floor(sg+xg*j+yg)*51;
+        var gg = "";
+        if( g.toString(16).length == 1){
+          gg = "0"+g.toString(16);
+        }else{
+          gg = g.toString(16);
+        }
+        var b = Math.floor(sb+xb*j+yb)*51;
+        var bb = "";
+        if( b.toString(16).length == 1){
+          bb = "0"+b.toString(16);
+        }else{
+          bb = b.toString(16);
+        }
+
+        var id = "tone_x"+j+"y"+i;
+        var col = "#"+rr+gg+bb;
+//        alert("r="+r+"\ng="+g+"\nb="+b+"\ncol="+col+"\nsg+xg*j+yg="+(sg+xg*j+yg)+"\nsg="+sg+"\nxg="+xg+"\nj="+j+"\nyg="+yg);
+        document.all.item(id).style.backgroundColor = col;
+      }
+    }
+  }
+  //-->
+  </script>
+</head>
+<body class="page">
+<div class="content">
+  <h1>■■　Color Simulator　■■</h1>
+  <hr>
+  <div>
+    <form name="from_black">
+      <table border="0">
+        <tr>
+          <td colspan="6"><h2 class="title">基本色へのグラデーション</h2>
+                          <span class="descript">右下のラジオボタンで基本色を設定すると、別の色の表示になります。</span><br><br></td>
+        </tr>
+        <tr>
+          <td colspan="6">黒から基本色へ<br></td>
+        </tr>
+        <tr align="center">
+          <td><input type="text" name="b1c" size="10" value="#000000"></td>
+          <td><input type="text" name="b2c" size="10" value="#000033"></td>
+          <td><input type="text" name="b3c" size="10" value="#000066"></td>
+          <td><input type="text" name="b4c" size="10" value="#000099"></td>
+          <td><input type="text" name="b5c" size="10" value="#0000cc"></td>
+          <td><input type="text" name="b6c" size="10" value="#0000ff"></td>
+        </tr>
+        <tr>
+          <td id="b1" class="cell" style="background-color:#000000;"></td>
+          <td id="b2" class="cell" style="background-color:#000033;"></td>
+          <td id="b3" class="cell" style="background-color:#000066;"></td>
+          <td id="b4" class="cell" style="background-color:#000099;"></td>
+          <td id="b5" class="cell" style="background-color:#0000cc;"></td>
+          <td id="b6" class="cell" style="background-color:#0000ff;"></td>
+        </tr>
+      </table>
+    </form>
+    <form name="from_white">
+      <table border="0">
+        <tr>
+          <td colspan="6">白から基本色へ</td>
+        </tr>
+        <tr align="center">
+          <td><input type="text" name="w1c" size="10" value="#ffffff"></td>
+          <td><input type="text" name="w2c" size="10" value="#ccccff"></td>
+          <td><input type="text" name="w3c" size="10" value="#9999ff"></td>
+          <td><input type="text" name="w4c" size="10" value="#6666ff"></td>
+          <td><input type="text" name="w5c" size="10" value="#3333ff"></td>
+          <td><input type="text" name="w6c" size="10" value="#0000ff"></td>
+        </tr>
+        <tr>
+          <td id="w1" class="cell" style="background-color:#ffffff;"></td>
+          <td id="w2" class="cell" style="background-color:#ccccff;"></td>
+          <td id="w3" class="cell" style="background-color:#9999ff;"></td>
+          <td id="w4" class="cell" style="background-color:#6666ff;"></td>
+          <td id="w5" class="cell" style="background-color:#3333ff;"></td>
+          <td id="w6" class="cell" style="background-color:#0000ff;"></td>
+        </tr>
+        <tr><td colspan="6"><br></td></tr>
+        <tr>
+          <td colspan="6" align="right">
+            赤　
+            <input type="radio" name="red"   value="0x00" onchange="grad_exec();" checked>00　
+            <input type="radio" name="red"   value="0x33" onchange="grad_exec();"        >33　
+            <input type="radio" name="red"   value="0x66" onchange="grad_exec();"        >66　
+            <input type="radio" name="red"   value="0x99" onchange="grad_exec();"        >99　
+            <input type="radio" name="red"   value="0xcc" onchange="grad_exec();"        >cc　
+            <input type="radio" name="red"   value="0xff" onchange="grad_exec();"        >ff　<br>
+            緑　
+            <input type="radio" name="green" value="0x00" onchange="grad_exec();" checked>00　
+            <input type="radio" name="green" value="0x33" onchange="grad_exec();"        >33　
+            <input type="radio" name="green" value="0x66" onchange="grad_exec();"        >66　
+            <input type="radio" name="green" value="0x99" onchange="grad_exec();"        >99　
+            <input type="radio" name="green" value="0xcc" onchange="grad_exec();"        >cc　
+            <input type="radio" name="green" value="0xff" onchange="grad_exec();"        >ff　<br>
+            青　
+            <input type="radio" name="blue"  value="0x00" onchange="grad_exec();"        >00　
+            <input type="radio" name="blue"  value="0x33" onchange="grad_exec();"        >33　
+            <input type="radio" name="blue"  value="0x66" onchange="grad_exec();"        >66　
+            <input type="radio" name="blue"  value="0x99" onchange="grad_exec();"        >99　
+            <input type="radio" name="blue"  value="0xcc" onchange="grad_exec();"        >cc　
+            <input type="radio" name="blue"  value="0xff" onchange="grad_exec();" checked>ff　
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <hr>
+  <div>
+    <h2 class="title">色の混合（カラーキューブを軸方向にみる）</h2>
+    <form name="rgb">
+    <table align="left">
+      <tr>
+        <td colspan="6"><span class="descript">↓パネルにマウスを置くと、ここに色番号が表示されます。</span></td>
+      </tr>
+      <tr>
+        <td colspan="6"><input type="text" name="color" size="9"></td>
+      </tr>
+      <tr>
+        <td id="x0y0" class="cell2" style="background-color:#0000ff;" onMouseOver="dispcolor(0,0)"></td>
+        <td id="x1y0" class="cell2" style="background-color:#3300ff;" onMouseOver="dispcolor(1,0)"></td>
+        <td id="x2y0" class="cell2" style="background-color:#6600ff;" onMouseOver="dispcolor(2,0)"></td>
+        <td id="x3y0" class="cell2" style="background-color:#9900ff;" onMouseOver="dispcolor(3,0)"></td>
+        <td id="x4y0" class="cell2" style="background-color:#cc00ff;" onMouseOver="dispcolor(4,0)"></td>
+        <td id="x5y0" class="cell2" style="background-color:#ff00ff;" onMouseOver="dispcolor(5,0)"></td>
+      </tr>
+      <tr>
+        <td id="x0y1" class="cell2" style="background-color:#0000cc;" onMouseOver="dispcolor(0,1)"></td>
+        <td id="x1y1" class="cell2" style="background-color:#3300cc;" onMouseOver="dispcolor(1,1)"></td>
+        <td id="x2y1" class="cell2" style="background-color:#6600cc;" onMouseOver="dispcolor(2,1)"></td>
+        <td id="x3y1" class="cell2" style="background-color:#9900cc;" onMouseOver="dispcolor(3,1)"></td>
+        <td id="x4y1" class="cell2" style="background-color:#cc00cc;" onMouseOver="dispcolor(4,1)"></td>
+        <td id="x5y1" class="cell2" style="background-color:#ff00cc;" onMouseOver="dispcolor(5,1)"></td>
+      </tr>
+      <tr>
+        <td id="x0y2" class="cell2" style="background-color:#000099;" onMouseOver="dispcolor(0,2)"></td>
+        <td id="x1y2" class="cell2" style="background-color:#330099;" onMouseOver="dispcolor(1,2)"></td>
+        <td id="x2y2" class="cell2" style="background-color:#660099;" onMouseOver="dispcolor(2,2)"></td>
+        <td id="x3y2" class="cell2" style="background-color:#990099;" onMouseOver="dispcolor(3,2)"></td>
+        <td id="x4y2" class="cell2" style="background-color:#cc0099;" onMouseOver="dispcolor(4,2)"></td>
+        <td id="x5y2" class="cell2" style="background-color:#ff0099;" onMouseOver="dispcolor(5,2)"></td>
+      </tr>
+      <tr>
+        <td id="x0y3" class="cell2" style="background-color:#000066;" onMouseOver="dispcolor(0,3)"></td>
+        <td id="x1y3" class="cell2" style="background-color:#330066;" onMouseOver="dispcolor(1,3)"></td>
+        <td id="x2y3" class="cell2" style="background-color:#660066;" onMouseOver="dispcolor(2,3)"></td>
+        <td id="x3y3" class="cell2" style="background-color:#990066;" onMouseOver="dispcolor(3,3)"></td>
+        <td id="x4y3" class="cell2" style="background-color:#cc0066;" onMouseOver="dispcolor(4,3)"></td>
+        <td id="x5y3" class="cell2" style="background-color:#ff0066;" onMouseOver="dispcolor(5,3)"></td>
+      </tr>
+      <tr>
+        <td id="x0y4" class="cell2" style="background-color:#000033;" onMouseOver="dispcolor(0,4)"></td>
+        <td id="x1y4" class="cell2" style="background-color:#330033;" onMouseOver="dispcolor(1,4)"></td>
+        <td id="x2y4" class="cell2" style="background-color:#660033;" onMouseOver="dispcolor(2,4)"></td>
+        <td id="x3y4" class="cell2" style="background-color:#990033;" onMouseOver="dispcolor(3,4)"></td>
+        <td id="x4y4" class="cell2" style="background-color:#cc0033;" onMouseOver="dispcolor(4,4)"></td>
+        <td id="x5y4" class="cell2" style="background-color:#ff0033;" onMouseOver="dispcolor(5,4)"></td>
+      </tr>
+      <tr>
+        <td id="x0y5" class="cell2" style="background-color:#000000;" onMouseOver="dispcolor(0,5)"></td>
+        <td id="x1y5" class="cell2" style="background-color:#330000;" onMouseOver="dispcolor(1,5)"></td>
+        <td id="x2y5" class="cell2" style="background-color:#660000;" onMouseOver="dispcolor(2,5)"></td>
+        <td id="x3y5" class="cell2" style="background-color:#990000;" onMouseOver="dispcolor(3,5)"></td>
+        <td id="x4y5" class="cell2" style="background-color:#cc0000;" onMouseOver="dispcolor(4,5)"></td>
+        <td id="x5y5" class="cell2" style="background-color:#ff0000;" onMouseOver="dispcolor(5,5)"></td>
+      </tr>
+    </table>
+    <table align="left"><tr><td width="50"></td></tr></table>
+    <table align="left">
+      <tr><td></td><td><span class="descript">軸の色</span></td></tr>
+      <tr><td></td><td align="center"><input type="text" name="z" size="5" value="#00"></td></tr>
+      <tr><td>#00</td><td id="rgb0" class="cell2" style="background-color:#000000;" onClick="chgrgb(0);"></td></tr>
+      <tr><td>#33</td><td id="rgb1" class="cell2" style="background-color:#003300;" onClick="chgrgb(1);"></td></tr>
+      <tr><td>#66</td><td id="rgb2" class="cell2" style="background-color:#006600;" onClick="chgrgb(2);"></td></tr>
+      <tr><td>#99</td><td id="rgb3" class="cell2" style="background-color:#009900;" onClick="chgrgb(3);"></td></tr>
+      <tr><td>#cc</td><td id="rgb4" class="cell2" style="background-color:#00cc00;" onClick="chgrgb(4);"></td></tr>
+      <tr><td>#ff</td><td id="rgb5" class="cell2" style="background-color:#00ff00;" onClick="chgrgb(5);"></td></tr>
+    </table>
+    <table align="left"><tr><td width="50"></td></tr></table>
+    <table>
+      <tr><td><span class="descript">軸方向</span></td></tr>
+      <tr><td>
+        <input type="radio" name="axis" value="0" checked onClick="chgrgb(0)">赤－青<br>
+        <input type="radio" name="axis" value="1"         onClick="chgrgb(0)">赤－緑<br>
+        <input type="radio" name="axis" value="2"         onClick="chgrgb(0)">青－緑<br>
+      </td></tr>
+    </table>
+    </form>
+    <br clear="all">
+    <br>
+  </div>
+  <hr>
+  <div>
+    <h2 class="title">トーン（カラーキューブを無彩色軸周りに見る）</h2>
+    <form name="tone">
+      <table align="left">
+        <tr>
+          <td colspan="6"><span class="descript">↓パネルにマウスを置くと、ここに色番号が表示されます。</span></td>
+        </tr>
+        <tr>
+          <td colspan="6"><input type="text" name="color" size="9"></td>
+        </tr>
+        <tr>
+          <td id="tone_x0y0" class="cell3" style="background-color:#0000ff;" onMouseOver="dispcolor2(0,0)"></td>
+          <td id="tone_x1y0" class="cell3" style="background-color:#3333ff;" onMouseOver="dispcolor2(1,0)"></td>
+          <td id="tone_x2y0" class="cell3" style="background-color:#6666ff;" onMouseOver="dispcolor2(2,0)"></td>
+          <td id="tone_x3y0" class="cell3" style="background-color:#9999ff;" onMouseOver="dispcolor2(3,0)"></td>
+          <td id="tone_x4y0" class="cell3" style="background-color:#ccccff;" onMouseOver="dispcolor2(4,0)"></td>
+          <td id="tone_x5y0" class="cell3" style="background-color:#ffffff;" onMouseOver="dispcolor2(5,0)"></td>
+        </tr>
+        <tr>
+          <td id="tone_x0y1" class="cell3" style="background-color:#0000cc;" onMouseOver="dispcolor2(0,1)"></td>
+          <td id="tone_x1y1" class="cell3" style="background-color:#3333cc;" onMouseOver="dispcolor2(1,1)"></td>
+          <td id="tone_x2y1" class="cell3" style="background-color:#6666cc;" onMouseOver="dispcolor2(2,1)"></td>
+          <td id="tone_x3y1" class="cell3" style="background-color:#9999cc;" onMouseOver="dispcolor2(3,1)"></td>
+          <td id="tone_x4y1" class="cell3" style="background-color:#cccccc;" onMouseOver="dispcolor2(4,1)"></td>
+          <td id="tone_x5y1" class="cell3" style="background-color:#ffffcc;" onMouseOver="dispcolor2(5,1)"></td>
+        </tr>
+        <tr>
+          <td id="tone_x0y2" class="cell3" style="background-color:#000099;" onMouseOver="dispcolor2(0,2)"></td>
+          <td id="tone_x1y2" class="cell3" style="background-color:#333399;" onMouseOver="dispcolor2(1,2)"></td>
+          <td id="tone_x2y2" class="cell3" style="background-color:#666699;" onMouseOver="dispcolor2(2,2)"></td>
+          <td id="tone_x3y2" class="cell3" style="background-color:#999999;" onMouseOver="dispcolor2(3,2)"></td>
+          <td id="tone_x4y2" class="cell3" style="background-color:#cccc99;" onMouseOver="dispcolor2(4,2)"></td>
+          <td id="tone_x5y2" class="cell3" style="background-color:#ffff99;" onMouseOver="dispcolor2(5,2)"></td>
+        </tr>
+        <tr>
+          <td id="tone_x0y3" class="cell3" style="background-color:#000066;" onMouseOver="dispcolor2(0,3)"></td>
+          <td id="tone_x1y3" class="cell3" style="background-color:#333366;" onMouseOver="dispcolor2(1,3)"></td>
+          <td id="tone_x2y3" class="cell3" style="background-color:#666666;" onMouseOver="dispcolor2(2,3)"></td>
+          <td id="tone_x3y3" class="cell3" style="background-color:#999966;" onMouseOver="dispcolor2(3,3)"></td>
+          <td id="tone_x4y3" class="cell3" style="background-color:#cccc66;" onMouseOver="dispcolor2(4,3)"></td>
+          <td id="tone_x5y3" class="cell3" style="background-color:#ffff66;" onMouseOver="dispcolor2(5,3)"></td>
+        </tr>
+        <tr>
+          <td id="tone_x0y4" class="cell3" style="background-color:#000033;" onMouseOver="dispcolor2(0,4)"></td>
+          <td id="tone_x1y4" class="cell3" style="background-color:#333333;" onMouseOver="dispcolor2(1,4)"></td>
+          <td id="tone_x2y4" class="cell3" style="background-color:#666633;" onMouseOver="dispcolor2(2,4)"></td>
+          <td id="tone_x3y4" class="cell3" style="background-color:#999933;" onMouseOver="dispcolor2(3,4)"></td>
+          <td id="tone_x4y4" class="cell3" style="background-color:#cccc33;" onMouseOver="dispcolor2(4,4)"></td>
+          <td id="tone_x5y4" class="cell3" style="background-color:#ffff33;" onMouseOver="dispcolor2(5,4)"></td>
+        </tr>
+        <tr>
+          <td id="tone_x0y5" class="cell3" style="background-color:#000000;" onMouseOver="dispcolor2(0,5)"></td>
+          <td id="tone_x1y5" class="cell3" style="background-color:#333300;" onMouseOver="dispcolor2(1,5)"></td>
+          <td id="tone_x2y5" class="cell3" style="background-color:#666600;" onMouseOver="dispcolor2(2,5)"></td>
+          <td id="tone_x3y5" class="cell3" style="background-color:#999900;" onMouseOver="dispcolor2(3,5)"></td>
+          <td id="tone_x4y5" class="cell3" style="background-color:#cccc00;" onMouseOver="dispcolor2(4,5)"></td>
+          <td id="tone_x5y5" class="cell3" style="background-color:#ffff00;" onMouseOver="dispcolor2(5,5)"></td>
+        </tr>
+      </table>
+      <table align="left"><tr><td width="50"></td></tr></table>
+      <table>
+        <tr>
+          <td style="font-family:monospace">
+            <span class="descript">左上－右下の色を選択</span><br>
+            <br>
+            <input type="radio" name="sel_col" onClick="chgtone(0,0,5);" checked><span style="color:#0000ff">#0000ff</span>－<span style="color:#ffff00">#ffff00</span><br>
+            <input type="radio" name="sel_col" onClick="chgtone(1,0,5);"        ><span style="color:#3300ff">#3300ff</span>－<span style="color:#ccff00">#ccff00</span><br>
+            <input type="radio" name="sel_col" onClick="chgtone(2,0,5);"        ><span style="color:#6600ff">#6600ff</span>－<span style="color:#99ff00">#99ff00</span><br>
+            <input type="radio" name="sel_col" onClick="chgtone(3,0,5);"        ><span style="color:#9900ff">#9900ff</span>－<span style="color:#66ff00">#66ff00</span><br>
+            <input type="radio" name="sel_col" onClick="chgtone(4,0,5);"        ><span style="color:#cc00ff">#cc00ff</span>－<span style="color:#33ff00">#33ff00</span><br>
+            <input type="radio" name="sel_col" onClick="chgtone(5,0,5);"        ><span style="color:#ff00ff">#ff00ff</span>－<span style="color:#00ff00">#00ff00</span><br>
+
+            <input type="radio" name="sel_col" onClick="chgtone(5,0,4);"        ><span style="color:#ff00cc">#ff00cc</span>－<span style="color:#00ff33">#00ff33</span><br>
+            <input type="radio" name="sel_col" onClick="chgtone(5,0,3);"        ><span style="color:#ff0099">#ff0099</span>－<span style="color:#00ff66">#00ff66</span><br>
+            <input type="radio" name="sel_col" onClick="chgtone(5,0,2);"        ><span style="color:#ff0066">#ff0066</span>－<span style="color:#00ff99">#00ff99</span><br>
+            <input type="radio" name="sel_col" onClick="chgtone(5,0,1);"        ><span style="color:#ff0033">#ff0033</span>－<span style="color:#00ffcc">#00ffcc</span><br>
+            <input type="radio" name="sel_col" onClick="chgtone(5,0,0);"        ><span style="color:#ff0000">#ff0000</span>－<span style="color:#00ffff">#00ffff</span><br>
+
+            <input type="radio" name="sel_col" onClick="chgtone(5,1,0);"        ><span style="color:#ff3300">#ff3300</span>－<span style="color:#00ccff">#00ccff</span><br>
+            <input type="radio" name="sel_col" onClick="chgtone(5,2,0);"        ><span style="color:#ff6600">#ff6600</span>－<span style="color:#0099ff">#0099ff</span><br>
+            <input type="radio" name="sel_col" onClick="chgtone(5,3,0);"        ><span style="color:#ff9900">#ff9900</span>－<span style="color:#0066ff">#0066ff</span><br>
+            <input type="radio" name="sel_col" onClick="chgtone(5,4,0);"        ><span style="color:#ffcc00">#ffcc00</span>－<span style="color:#0033ff">#0033ff</span><br>
+            <input type="radio" name="sel_col" onClick="chgtone(5,5,0);"        ><span style="color:#ffff00">#ffff00</span>－<span style="color:#0000ff">#0000ff</span><br>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>
+</body>
+</html>
