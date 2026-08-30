@@ -1,0 +1,23 @@
+import java.io.*;
+
+/**
+ テキストファイル変換プログラム
+ @auther 山田 洋
+*/
+public class TFUtil{
+	public static void main(String[] args) throws IOException{
+		if(args.length < 1){
+			return;
+		}
+		int no = Integer.parseInt(args[0]) - 1;
+		
+		TFileFunc[] func = {
+			new Copy(),
+			new Encrypt(),
+			new Decrypt()
+		};
+		
+		IO io = new IO();
+		func[no].exec(io);
+	}
+}

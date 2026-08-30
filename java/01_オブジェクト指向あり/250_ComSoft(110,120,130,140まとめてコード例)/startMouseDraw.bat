@@ -1,0 +1,1 @@
+start javaw mousedraw.MouseGUI
