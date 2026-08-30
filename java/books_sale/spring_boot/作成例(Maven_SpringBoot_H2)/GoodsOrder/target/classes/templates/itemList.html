@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" th:href="@{/style.css}">
+  <title>商品一覧：書籍販売システム</title>
+</head>
+<body>
+  <section id="container">
+    <h1>書籍販売システム</h1>
+    <h2>商品一覧</h2>
+
+    <p class="message" th:text="${message}"></p>
+
+    <table>
+      <tr>
+        <th>番号</th><th>書籍名</th><th>価格</th><th>注文</th>
+      </tr>
+      
+      <tr th:each="item, stat : ${session.itemlist}">
+        <td class="no" th:text="${stat.count}"></td>
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.price} + '円'"></td>
+        <td>
+          <form action="order.html" method="post">
+            <input type="hidden" name="itemcode" th:value="${item.code}">
+            <input type="submit" value="注文">
+          </form>
+        </td>
+      </tr>
+
+    </table>
+    <form class="to_top" action="index.html">
+      <input type="submit" value="トップへ戻る">
+    </form>
+  </section>
+</body>
+</html>
